@@ -1,17 +1,14 @@
-import cairocffi as cairo
+from cairocffi import cairo
 
-
-class Renderer:
-    pass
+from ._renderer import Renderer
 
 
 class CairoRenderer(Renderer):
 
-    def __init__(self, width, height):
-        self.width = width
-        self.height = height
+    def __init__(self, scene):
+        super().__init__(scene)
 
-        self.surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, width, height)
+        self.surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, scene.width, scene.height)
         self.context = cairo.Context(self.surface)
 
         self.context.set_source_rgb(1, 1, 1)
