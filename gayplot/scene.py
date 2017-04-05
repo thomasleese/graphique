@@ -19,11 +19,27 @@ class Colour(NamedTuple):
 
 class Node:
 
-    def __init__(self, name=None):
+    def __init__(self, name = None):
         self.name = name
         self.children = []
         self.position = Vector(0, 0)
         self.size = Vector(0, 0)
+
+    @property
+    def x(self):
+        return self.position.x
+
+    @property
+    def y(self):
+        return self.position.y
+
+    @property
+    def width(self):
+        return self.size.x
+
+    @property
+    def height(self):
+        return self.size.y
 
     def find_child(self, name):
         for child in self.children:
@@ -74,12 +90,19 @@ class Line(Node):
     pass
 
 
+class Font:
+
+    def __init__(self, name, size):
+        self.name = name
+        self.size = size
+
+
 class Text(Node):
 
-    def __init__(self, text=''):
+    default_font = Font('sans', 12)
+
+    def __init__(self, text = '', font = None):
+        super().__init__()
+
         self.text = text
-
-
-class Scene(Node):
-
-    pass
+        self.font = font if font else self.default_font

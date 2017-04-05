@@ -13,7 +13,9 @@ dataset = gayplot.Dataset(
 
 chart = gayplot.PieChart(dataset)
 chart.title = 'Different Fruits'
+chart.size = gayplot.Vector(2000, 1200)
+chart.layout()
 
-cairo = gayplot.CairoRenderer(chart)
-cairo.draw()
-cairo.save('chart.png')
+renderer = gayplot.CairoRenderer(chart)
+renderer.draw()
+renderer.save('chart.png')
