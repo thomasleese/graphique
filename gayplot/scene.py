@@ -7,6 +7,9 @@ class Vector(NamedTuple):
     x: float
     y: float
 
+    def __add__(self, other):
+        return Vector(self.x + other.x, self.y + other.y)
+
 
 class Colour(NamedTuple):
     """A class representing a colour."""
@@ -20,6 +23,8 @@ class Colour(NamedTuple):
 class Node:
 
     def __init__(self, name = None):
+        super().__init__()
+
         self.name = name
         self.children = []
         self.position = Vector(0, 0)
@@ -64,7 +69,9 @@ class Node:
 
 class Shape:
 
-    def __init__(self, colour = Colour(1, 1, 1, 1), line_colour = None, line_width = 1):
+    def __init__(self, colour = None, line_colour = None, line_width = None):
+        super().__init__()
+
         self.colour = colour
         self.line_width = line_width
         self.line_colour = line_colour
@@ -72,7 +79,11 @@ class Shape:
 
 class Rectangle(Node, Shape):
 
-    pass
+    def __init__(self, x, y, width, height):
+        super().__init__()
+
+        self.position = Vector(x, y)
+        self.size = Vector(width, height)
 
 
 class Ellipse(Node):

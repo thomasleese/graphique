@@ -2,18 +2,13 @@ import gayplot
 
 
 dataset = gayplot.Dataset(
-    [(str, 'Fruit'), (int, 'Amount')],
-    [
-        ('Apples', 2),
-        ('Bananaes', 4),
-        ('Pears', 3),
-        ('Peaches', 1)
-    ]
+    [(float, 'X'), (float, 'Y')],
+    [(x * 3, x) for x in range(100)],
 )
 
-chart = gayplot.PieChart(dataset)
-chart.title = 'Different Fruits'
-chart.size = gayplot.Vector(2000, 1200)
+chart = gayplot.ScatterChart(dataset)
+chart.title = 'Scatter Chart'
+chart.size = gayplot.Vector(1000, 1000)
 chart.layout()
 
 renderer = gayplot.CairoRenderer(chart)

@@ -32,13 +32,6 @@ class Chart(Node):
         self['title'].font.size = 36
         self['legend'] = Legend()
 
-        self['rect1'] = Rectangle()
-        self['rect1'].colour = Colour(0, 1, 0, 1)
-        self['rect1'].position = Vector(10, 70)
-
-        self['rect2'] = Rectangle()
-        self['rect2'].colour = Colour(0, 0, 1, 1)
-
     @property
     def title(self):
         return self['title'].text
@@ -53,12 +46,45 @@ class Chart(Node):
 
     def layout(self):
         self['title'].size = Vector(self.width - 20, 50)
-        self['rect1'].size = Vector(self.width - 410, self.height - 80)
-        self['rect2'].size = Vector(380, self.height - 80)
-        self['rect2'].position = Vector(self.width - 390, 70)
 
 
-class PieChart(Chart):
+class ScatterPlot(Node):
 
-    def update(self):
-        pass
+    def __init__(self, dataset):
+        super().__init__()
+
+        self.dataset = dataset
+
+        self['area'] = Rectangle(0, 0, 0, 0)
+        self['area'].line_width = 2
+        self['area'].line_colour = Colour(0, 0, 0, 1)
+
+        self['points'] = Node()
+
+    def add_points(self):
+        for row in self.dataset.rows:
+            rect = Rectangle(row.values[0] * 10 - 3, self['points'].size.y - (row.values[1] * 10 - 3), 6, 6)
+            rect.colour = Colour(0, 0, 0, 1)
+            self['points'].add_child(rect)
+
+    def layout(self):
+        self['area'].size = self.size
+        self['points'].size = self.size
+
+        self['points'].children.clear()
+        self.add_points()
+
+
+class ScatterChart(Chart):
+
+    def __init__(self, dataset):
+        super().__init__(dataset)
+
+        self['plot'] = ScatterPlot(dataset)
+
+    def layout(self):
+        super().layout()
+
+        self['plot'].position = Vector(10, self['title'].size.y + 20)
+        self['plot'].size = Vector(self.width - 20, self.height - (self['title'].position.y + self['title'].size.y + 20))
+        self['plot'].layout()
