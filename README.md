@@ -1,6 +1,6 @@
 ![Graphique - Better charts for Python](logo.png)
 
-[![Build Status](https://travis-ci.org/thomasleese/graphique.svg?branch=master)](https://travis-ci.org/thomasleese/graphique) [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](LICENSE.md)
+[![Build Status](https://img.shields.io/travis/thomasleese/graphique.svg)](https://travis-ci.org/thomasleese/graphique) [![MIT Licence](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
 
 ## Installation
 
