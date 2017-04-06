@@ -16,7 +16,7 @@ class Axis:
         self.orientation = Orientation.horizontal
 
 
-class Legend(Node):
+class Legend:
 
     def __init__(self, columns = None):
         super().__init__()
@@ -41,7 +41,7 @@ class AxesList(UserList):
         self.data = data
 
 
-class Chart(Node):
+class Chart:
 
     def __init__(self, series, title: Optional[str] = None):
         super().__init__()
