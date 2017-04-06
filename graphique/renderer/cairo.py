@@ -6,7 +6,7 @@ from ._renderer import Renderer
 from ..graphics import *
 
 
-class CairoRenderer(Renderer):
+class Cairo(Renderer):
 
     def __init__(self, chart):
         super().__init__(chart)
@@ -24,7 +24,7 @@ class CairoRenderer(Renderer):
         self.surface.write_to_png(filename)
 
     def draw(self):
-        self.chart.layout()
+        #self.chart.layout()
 
         self.surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, self.chart.width, self.chart.height)
         self.context = cairo.Context(self.surface)

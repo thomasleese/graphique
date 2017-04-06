@@ -1,3 +1,3 @@
-from .charts import *
-from .dataset import *
-from .renderers import *
+from .chart import *
+from . import series
+from . import renderer
