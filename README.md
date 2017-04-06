@@ -1,5 +1,7 @@
 ![Graphique - Better charts for Python](logo.png)
 
+[![Build Status](https://travis-ci.org/thomasleese/graphique.svg?branch=master)](https://travis-ci.org/thomasleese/graphique) [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](LICENSE.md)
+
 ## Installation
 
 ```bash
