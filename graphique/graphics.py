@@ -28,11 +28,18 @@ class Size(BasePoint):
         return self.y
 
 
-class Colour(NamedTuple):
+class BaseColour(NamedTuple):
     r: float
     g: float
     b: float
     a: float
+
+
+class Colour(BaseColour):
+
+    @classmethod
+    def from_rgb(cls, r, g, b):
+        return cls(r / 255, g / 255, b / 255, 1)
 
 
 class Node:
@@ -101,14 +108,21 @@ class Rectangle(Node, Shape):
         self.size = Size(width, height)
 
 
-class Ellipse(Node):
+class Ellipse(Node, Shape):
 
-    pass
+    def __init__(self, cx, cy, radius):
+        super().__init__()
 
+        self.position = Point(cx - radius, cy - radius)
+        self.size = Size(radius * 2, radius * 2)
 
-class Dot(Node):
+    @property
+    def diameter(self):
+        return (self.size.width + self.size.height) / 2
 
-    pass
+    @property
+    def radius(self):
+        return self.diameter / 2
 
 
 class Line(Node):

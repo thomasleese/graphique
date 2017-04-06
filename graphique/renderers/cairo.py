@@ -1,3 +1,5 @@
+import math
+
 import cairocffi as cairo
 
 from ._renderer import Renderer
@@ -36,6 +38,8 @@ class CairoRenderer(Renderer):
             self.draw_text_node(node)
         elif isinstance(node, Rectangle):
             self.draw_rectangle_node(node)
+        elif isinstance(node, Ellipse):
+            self.draw_ellipse_node(node)
 
         self.current_position.append(self.current_position[-1] + node.position)
 
@@ -60,6 +64,24 @@ class CairoRenderer(Renderer):
             self.current_position[-1].y + node.y,
             node.width, node.height
         )
+
+        if node.colour:
+            self.context.set_source_rgb(node.colour.r, node.colour.g, node.colour.b)
+            self.context.fill()
+
+        if node.line_colour:
+            self.context.set_source_rgb(node.line_colour.r, node.line_colour.g, node.line_colour.b)
+            self.context.stroke()
+
+    def draw_ellipse_node(self, node):
+        ctx = self.context
+
+        ctx.save()
+        ctx.translate(self.current_position[-1].x + node.x + node.radius,
+                      self.current_position[-1].y + node.y + node.radius)
+        ctx.scale(node.radius, node.radius)
+        ctx.arc(0, 0, 1, 0, 2 * math.pi)
+        ctx.restore()
 
         if node.colour:
             self.context.set_source_rgb(node.colour.r, node.colour.g, node.colour.b)

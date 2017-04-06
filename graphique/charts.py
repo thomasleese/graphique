@@ -29,7 +29,7 @@ class Chart(Node):
 
         self['title'] = Text(title)
         self['title'].position = Point(10, 10)
-        self['title'].font.size = 36
+        self['title'].font.size = 24
         self['legend'] = Legend()
 
     @property
@@ -62,10 +62,13 @@ class ScatterPlot(Node):
         self['points'] = Node()
 
     def add_points(self):
+        colours = [Colour.from_rgb(26, 188, 156), Colour.from_rgb(52, 152, 219), Colour.from_rgb(155, 89, 182)]
+
         for row in self.dataset.rows:
-            rect = Rectangle(row.values[0] * 10 - 3, self['points'].height - (row.values[1] * 10 - 3), 6, 6)
-            rect.colour = Colour(0, 0, 0, 1)
-            self['points'].add_child(rect)
+            for i in range(1, len(self.dataset.columns)):
+                rect = Ellipse(row.values[0] * 10, self['points'].height - row.values[i] * 10, 2)
+                rect.colour = colours[i - 1]
+                self['points'].add_child(rect)
 
     def layout(self):
         self['area'].size = self.size
