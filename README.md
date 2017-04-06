@@ -1,2 +1,1 @@
-# gayplot
-A better plotting library.
+![Graphique - Better charts for Python](logo.png)
