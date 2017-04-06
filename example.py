@@ -9,7 +9,6 @@ dataset = graphique.Dataset(
 chart = graphique.ScatterChart(dataset)
 chart.title = 'Scatter Chart'
 chart.size = graphique.Vector(1000, 1000)
-chart.layout()
 
 renderer = graphique.CairoRenderer(chart)
 renderer.draw()

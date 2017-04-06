@@ -22,6 +22,8 @@ class CairoRenderer(Renderer):
         self.surface.write_to_png(filename)
 
     def draw(self):
+        self.chart.layout()
+
         self.surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, self.chart.width, self.chart.height)
         self.context = cairo.Context(self.surface)
 
