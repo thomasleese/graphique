@@ -1,4 +1,4 @@
-from .scene import *
+from .graphics import *
 
 
 class Legend(Node):
@@ -28,7 +28,7 @@ class Chart(Node):
         self.dataset = dataset
 
         self['title'] = Text(title)
-        self['title'].position = Vector(10, 10)
+        self['title'].position = Point(10, 10)
         self['title'].font.size = 36
         self['legend'] = Legend()
 
@@ -45,7 +45,7 @@ class Chart(Node):
         return self['legend']
 
     def layout(self):
-        self['title'].size = Vector(self.width - 20, 50)
+        self['title'].size = Size(self.width - 20, 50)
 
 
 class ScatterPlot(Node):
@@ -63,7 +63,7 @@ class ScatterPlot(Node):
 
     def add_points(self):
         for row in self.dataset.rows:
-            rect = Rectangle(row.values[0] * 10 - 3, self['points'].size.y - (row.values[1] * 10 - 3), 6, 6)
+            rect = Rectangle(row.values[0] * 10 - 3, self['points'].height - (row.values[1] * 10 - 3), 6, 6)
             rect.colour = Colour(0, 0, 0, 1)
             self['points'].add_child(rect)
 
@@ -85,6 +85,6 @@ class ScatterChart(Chart):
     def layout(self):
         super().layout()
 
-        self['plot'].position = Vector(10, self['title'].size.y + 20)
-        self['plot'].size = Vector(self.width - 20, self.height - (self['title'].position.y + self['title'].size.y + 20))
+        self['plot'].position = Point(10, self['title'].height + 20)
+        self['plot'].size = Size(self.width - 20, self.height - (self['title'].y + self['title'].height + 20))
         self['plot'].layout()

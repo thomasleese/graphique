@@ -1,7 +1,7 @@
 import cairocffi as cairo
 
 from ._renderer import Renderer
-from ..scene import *
+from ..graphics import *
 
 
 class CairoRenderer(Renderer):
@@ -11,7 +11,7 @@ class CairoRenderer(Renderer):
 
         self.chart = chart
 
-        self.current_position = [Vector(0, 0)]
+        self.current_position = [Point(0, 0)]
 
     def clear(self):
         self.context.set_source_rgb(1, 1, 1)

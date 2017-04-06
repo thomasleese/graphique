@@ -1,19 +1,34 @@
 from typing import NamedTuple
 
 
-class Vector(NamedTuple):
-    """A class representing an x, y coordinate in space."""
-
+class BasePoint(NamedTuple):
     x: float
     y: float
 
+
+class Point(BasePoint):
+    """A class representing an x, y coordinate in space."""
+
+    def copy(self, x: float = None, y: float = None):
+        return Point(x if x else self.x, y if y else self.y)
+
     def __add__(self, other):
-        return Vector(self.x + other.x, self.y + other.y)
+        return Point(self.x + other.x, self.y + other.y)
+
+
+class Size(BasePoint):
+    """A class representing a size in space."""
+
+    @property
+    def width(self):
+        return self.x
+
+    @property
+    def height(self):
+        return self.y
 
 
 class Colour(NamedTuple):
-    """A class representing a colour."""
-
     r: float
     g: float
     b: float
@@ -27,8 +42,8 @@ class Node:
 
         self.name = name
         self.children = []
-        self.position = Vector(0, 0)
-        self.size = Vector(0, 0)
+        self.position = Point(0, 0)
+        self.size = Size(0, 0)
 
     @property
     def x(self):
@@ -40,11 +55,11 @@ class Node:
 
     @property
     def width(self):
-        return self.size.x
+        return self.size.width
 
     @property
     def height(self):
-        return self.size.y
+        return self.size.height
 
     def find_child(self, name):
         for child in self.children:
@@ -82,8 +97,8 @@ class Rectangle(Node, Shape):
     def __init__(self, x, y, width, height):
         super().__init__()
 
-        self.position = Vector(x, y)
-        self.size = Vector(width, height)
+        self.position = Point(x, y)
+        self.size = Size(width, height)
 
 
 class Ellipse(Node):
@@ -91,7 +106,7 @@ class Ellipse(Node):
     pass
 
 
-class Point(Node):
+class Dot(Node):
 
     pass
 

@@ -19,7 +19,7 @@ dataset = graphique.Dataset(
 
 chart = graphique.ScatterChart(dataset)
 chart.title = 'Scatter Chart'
-chart.size = graphique.Vector(1000, 1000)
+chart.size = graphique.Size(1000, 1000)
 
 renderer = graphique.CairoRenderer(chart)
 renderer.draw()
